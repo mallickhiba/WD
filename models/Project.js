@@ -1,7 +1,17 @@
 const mongoose = require('mongoose');
 
 const ProjectSchema = new mongoose.Schema({
-  name: {
+  pid: String,
+  name: String,
+  endDate: String,
+  members: String,
+  user: { type: mongoose.SchemaTypes.ObjectId, ref: 'Users' },
+  createdAt: {
+      type: Date,
+      default: Date.now
+  }
+
+  /*name: {
     type: String,
     required: true
   },
@@ -19,7 +29,7 @@ const ProjectSchema = new mongoose.Schema({
   members: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Users'
-  }]
+  }] */
 });
 
 const Project = mongoose.model('Project', ProjectSchema);

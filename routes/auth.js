@@ -1,7 +1,7 @@
-const bcrypt = require("bcrypt");
-const Users = require("../models/User");
 var express = require("express");
 var router = express.Router();
+const Users = require("../models/User");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
 
 router.post("/register", async (req, res) => {
@@ -9,10 +9,9 @@ router.post("/register", async (req, res) => {
         const { email, password } = req.body
 
         let user = await Users.findOne({ email })
-        if (user) return res.json({ msg: "User Exists" })
+        if (user) return res.json({ msg: "User Already Exists" })
 
         await Users.create({ ...req.body, password: await bcrypt.hash(password, 5) });
-
         return res.json({ msg: "User Registered" })
     } catch (error) {
         console.error(e)
@@ -24,10 +23,10 @@ router.post("/login", async (req, res) => {
         const { email, password } = req.body
 
         const user = await Users.findOne({ email })
-        if (!user) return res.json({ msg: "USER NOT FOUND" })
+        if (!user) return res.json({ msg: "User not found" })
 
         const passwordCheck = await bcrypt.compare(password, user.password);
-        if (!passwordCheck) return res.json({ msg: "WRONG PASSWORD" })
+        if (!passwordCheck) return res.json({ msg: "Wrong Password" })
 
         const token = jwt.sign({
             email,
@@ -36,7 +35,7 @@ router.post("/login", async (req, res) => {
         }, "MY_SECRET", { expiresIn: "1d" });
 
         res.json({
-            msg: "LOGGED IN", token
+            msg: "Logged in sucessfully", token
         })
     } catch (error) {
         console.error(error)

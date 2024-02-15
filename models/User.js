@@ -5,15 +5,8 @@ const UserSchema = new mongoose.Schema({
     password: String,
     firstName: String,
     lastName: String,
-    age: {
-        type: Number,
-        default: 0
-    },
-    role: {
-        type: String,
-        enum: ['Super', 'Admin', 'Poject Manager', 'Member'],
-        default: 'Member'
-    },
+    //role: {type: String,enum: ['Super', 'Admin', 'Poject Manager', 'Member'],default: 'Member'},
+    admin: { type: Boolean, default: false },
     createdAt: {
         type: Date,
         default: Date.now

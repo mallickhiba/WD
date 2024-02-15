@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: false }));
 
 (async () => {
     try {
-        await mongoose.connect("mongodb://localhost:27017/test")
+        await mongoose.connect("mongodb+srv://mallickhiba:6k01T6hQZH3zN463@cluster0.hlhg6oe.mongodb.net/")
         console.log('Connection has been established successfully.');
     } catch (error) {
         console.error('Unable to connect to the database:', error);
@@ -20,7 +20,8 @@ const router = require('./routes/index');
 app.use('/', router);
 
 app.use(function (req, res, next) {
-    next(createError(404));
+    console.log(req.body)
+    next(createError(404)); // middleware 
 });
 
 const PORT = 5600;
