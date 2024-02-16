@@ -1,15 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require("jsonwebtoken")
-
+const jwt = require("jsonwebtoken");
 const authRouter = require("./auth");
 const projectRouter = require("./project");
 const taskRouter = require("./task");
 const activityRouter = require("./activity");
 
-
 router.use("/auth", authRouter);
-
 
 //put this middleware after logging to apply it to neeche wali routes
 router.use(async (req, res, next) => {
@@ -23,9 +20,8 @@ router.use(async (req, res, next) => {
     }
 })
 
-
 router.use("/project", projectRouter);
 router.use("/task", taskRouter);
-//router.use("/activity", activityRouter);
+router.use("/activity", activityRouter);
 
 module.exports = router;

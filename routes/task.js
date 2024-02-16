@@ -29,8 +29,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-
-
 router.use((req, res, next) => {
   if (!req.user.admin) return res.json({ msg: "NOT ADMIN" })
   else next()
