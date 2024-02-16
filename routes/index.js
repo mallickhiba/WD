@@ -25,7 +25,7 @@ router.use(async (req, res, next) => {
 
 
 router.use("/project", projectRouter);
-//router.use("/task", taskRouter);
+router.use("/task", taskRouter);
 //router.use("/activity", activityRouter);
 
 module.exports = router;

@@ -3,8 +3,9 @@ const router = express.Router();
 const Task = require("../models/Task");
 
 // GET all tasks
-router.get('/tasks', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
+    console.log("getting all the tasks")
     const tasks = await Task.find();
     res.json({ tasks });
   } catch (error) {
@@ -14,8 +15,9 @@ router.get('/tasks', async (req, res) => {
 });
 
 // GET a specific task by ID
-router.get('/tasks/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
+    console.log("getting all the tasks w id " + req.params.id)
     const task = await Task.findById(req.params.id);
     if (!task) {
       return res.status(404).json({ msg: "Task not found" });
@@ -27,9 +29,18 @@ router.get('/tasks/:id', async (req, res) => {
   }
 });
 
+
+
+router.use((req, res, next) => {
+  if (!req.user.admin) return res.json({ msg: "NOT ADMIN" })
+  else next()
+})
+
+
 // POST a new task
-router.post('/tasks', async (req, res) => {
+router.post('/create', async (req, res) => {
   try {
+    console.log("creating new task")
     const newTask = new Task(req.body);
     const savedTask = await newTask.save();
     res.status(201).json({ msg: "Task created", task: savedTask });
@@ -40,8 +51,9 @@ router.post('/tasks', async (req, res) => {
 });
 
 // PUT/UPDATE an existing task
-router.put('/tasks/:id', async (req, res) => {
+router.put('/update/:id', async (req, res) => {
   try {
+    console.log("editing task with id "+ req.params.id)
     const task = await Task.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
@@ -58,8 +70,9 @@ router.put('/tasks/:id', async (req, res) => {
 });
 
 // DELETE a task
-router.delete('/tasks/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
   try {
+    console.log("deleting task w id" + req.params.id)
     const task = await Task.findByIdAndDelete(req.params.id);
     if (!task) {
       return res.status(404).json({ msg: "Task not found" });
@@ -71,3 +84,4 @@ router.delete('/tasks/:id', async (req, res) => {
   }
 });
 
+module.exports = router
