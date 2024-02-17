@@ -41,15 +41,12 @@ router.post("/getbypidwithuser", async (req, res) => {
     }
 });
 
-/******* below are all the routes that WILL NOT pass through the middleware ********/
-/*
+///ADDING MIDDLEWARE FOR ROLE-BASED APIS
 router.use((req, res, next) => {
     if (!req.user.admin) return res.json({ msg: "NOT ADMIN" })
     else next()
 })
-*/
 
-/******* below are all the routes that WILL pass through the middleware ********/
 
 router.post("/create", async (req, res) => {
     try {
@@ -73,8 +70,6 @@ router.post("/deleteBy", async (req, res) => {
     }
 });
 
-
-// DELETE a project
 router.delete('/delete/:id', async (req, res) => {
     try {
       console.log("deleting proj w id" + req.body.pid)
