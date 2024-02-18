@@ -6,7 +6,22 @@ const jwt = require("jsonwebtoken")
 
 router.post("/register", async (req, res) => {
     try {
-        const { email, password } = req.body
+        const { email, password, firstName, lastName } = req.body
+
+        if (password.length < 8 || !/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
+            throw new Error("Password must be at least 8 characters long and include both numbers and alphabets.")
+        }
+
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            throw new Error("Invalid email format.")
+        }
+
+        if (firstName.length < 3) {
+            throw new Error("First name must be at least 3 characters long.")
+        }
+        if (lastName.length < 3) {
+            throw new Error("Last name must be at least 3 characters long.")
+        }
 
         let user = await Users.findOne({ email })
         if (user) return res.json({ msg: "USER EXISTS" })
@@ -15,10 +30,10 @@ router.post("/register", async (req, res) => {
 
         return res.json({ msg: "CREATED" })
     } catch (error) {
-        console.error(e)
+        console.error(error)
+        return res.status(400).json({ error: error.message })
     }
 });
-
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body

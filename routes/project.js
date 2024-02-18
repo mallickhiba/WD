@@ -1,6 +1,7 @@
 const Users = require("../models/User");
 const Project = require("../models/Project");
 var express = require("express");
+const mongoose = require("mongoose");
 var router = express.Router();
 
 
@@ -15,15 +16,16 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET a specific project by ID
+// GET a specific project by PID
 router.get('/:id', async (req, res) => {
     try {
-        console.log("getting project with id " + req.params.id)
-        const project = await Project.findById(req.params.id);
+        console.log("getting project with pid " + req.params.id)
+        const proj = await Project.findOne({ pid: req.params.id })
         if (!project) {
             return res.status(404).json({ msg: "project not found" });
         }
-        res.json({ project });
+        res.json({ msg: "PROJECT FOUND", data: proj })
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: "Internal server error" });
@@ -55,14 +57,25 @@ router.post("/create", async (req, res) => {
     try {
         const user = await Users.findOne({ email: req.body.email })
         if (!user) return res.json({ msg: "USER NOT FOUND" })
+
+        if (!req.body.pid || !req.body.name) {
+            return res.status(400).json({ msg: "pid and name are required" });
+        }
+
+        const existingProject = await Project.findOne({ pid: req.body.pid });
+        if (existingProject) {
+            return res.status(409).json({ msg: "Project with the same pid already exists" });
+        }
+
         await Project.create({ ...req.body, user: user._id })
-        res.json({ msg: "proj ADDED" })
+        res.json({ msg: "proj ADDED by user" + user.email })
     } catch (error) {
         console.error(error)
+        res.status(500).json({ msg: "Internal server error" });
     }
 });
 
-router.post("/deleteBy", async (req, res) => {
+router.post("/deleteby", async (req, res) => {
     try {
         const proj = await Project.findOne({ pid: req.body.pid})
         if (!proj) return res.json({ msg: "proj NOT FOUND" })
