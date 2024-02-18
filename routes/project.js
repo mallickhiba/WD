@@ -41,11 +41,14 @@ router.post("/getbypidwithuser", async (req, res) => {
     }
 });
 
-///ADDING MIDDLEWARE FOR ROLE-BASED APIS
+/*******ADDING MIDDLEWARE FOR ROLE-BASED APIS********/
+
 router.use((req, res, next) => {
+    //res.send(req.user.email + " IS AN ADMIN? " + req.user.admin)
     if (!req.user.admin) return res.json({ msg: "NOT ADMIN" })
     else next()
 })
+
 
 
 router.post("/create", async (req, res) => {

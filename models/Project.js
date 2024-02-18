@@ -11,7 +11,7 @@ const ProjectSchema = new mongoose.Schema({
       default: Date.now
   }
 
-  /*name: {
+  /*name: {  
     type: String,
     required: true
   },
