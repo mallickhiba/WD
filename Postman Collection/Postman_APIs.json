@@ -90,6 +90,62 @@
 						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDItMThUMTI6MTc6MzcuMDQ1WiIsImFkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTg2NTcsImV4cCI6MTcwODM0NTA1N30.GfObnWCzKw6UqPufMwnPoRCr5MmRFFgJTOeVQ3fNlMk"
 					}
 				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pid\": \"XYZ1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5600/project//getbypidwithuser"
+			},
+			"response": []
+		},
+		{
+			"name": "GET PROJECT WITH USER",
+			"id": "2c3193e4-1865-4a1f-bc61-65c81a7c452a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDItMThUMTI6MTc6MzcuMDQ1WiIsImFkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTg2NTcsImV4cCI6MTcwODM0NTA1N30.GfObnWCzKw6UqPufMwnPoRCr5MmRFFgJTOeVQ3fNlMk"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pid\": \"XYZ1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5600/project//getbypidwithuser"
+			},
+			"response": []
+		},
+		{
+			"name": "GET PROJECT",
+			"id": "c86d49e2-2228-4a7f-a5df-ce6a1dba8186",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDItMThUMTI6MTc6MzcuMDQ1WiIsImFkbWluIjp0cnVlLCJpYXQiOjE3MDgyNTg2NTcsImV4cCI6MTcwODM0NTA1N30.GfObnWCzKw6UqPufMwnPoRCr5MmRFFgJTOeVQ3fNlMk"
+					}
+				},
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -102,6 +158,19 @@
 					}
 				},
 				"url": "http://localhost:5600/project/"
+			},
+			"response": []
+		},
+		{
+			"name": "GET PROJECT BY PID",
+			"id": "4564e62c-5176-40de-81d6-3541018e04a3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5600/project/XYZ1"
 			},
 			"response": []
 		}
