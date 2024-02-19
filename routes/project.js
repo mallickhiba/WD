@@ -4,7 +4,6 @@ var express = require("express");
 const mongoose = require("mongoose");
 var router = express.Router();
 
-
 router.get('/', async (req, res) => {
     try {
         console.log("getting all the projects")
