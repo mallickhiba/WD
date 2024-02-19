@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
     try {
         console.log("getting project with pid " + req.params.id)
         const proj = await Project.findOne({ pid: req.params.id })
-        if (!project) {
+        if (!proj) {
             return res.status(404).json({ msg: "project not found" });
         }
         res.json({ msg: "PROJECT FOUND", data: proj })
@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
 
 router.post("/getbypidwithuser", async (req, res) => {
     try {
-        const proj = await Project.findOne({ pid: req.body.pid }).populate("user")
+        const proj = await Project.findOne({ pid: req.body.pid }).populate("user", "-password")
         if (!proj) return res.json({ msg: "proj NOT FOUND" })
         res.json({ msg: "proj FOUND", data: proj })
     } catch (error) {
@@ -43,7 +43,7 @@ router.post("/getbypidwithuser", async (req, res) => {
     }
 });
 
-/*******ADDING MIDDLEWARE FOR ROLE-BASED APIS********/
+/****ADDING MIDDLEWARE FOR ROLE-BASED APIS****/
 
 router.use((req, res, next) => {
     //res.send(req.user.email + " IS AN ADMIN? " + req.user.admin)
