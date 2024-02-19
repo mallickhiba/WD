@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET a specific project by PID
+// getting by pid in URL
 router.get('/:id', async (req, res) => {
     try {
         console.log("getting project with pid " + req.params.id)
@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-
+//getting by pid with user from body
 router.post("/getbypidwithuser", async (req, res) => {
     try {
         const proj = await Project.findOne({ pid: req.body.pid }).populate("user", "-password")
@@ -50,8 +50,6 @@ router.use((req, res, next) => {
     if (!req.user.admin) return res.json({ msg: "NOT ADMIN" })
     else next()
 })
-
-
 
 router.post("/create", async (req, res) => {
     try {
@@ -75,6 +73,25 @@ router.post("/create", async (req, res) => {
     }
 });
 
+//updating via URL
+router.put('/:id', async (req, res) => {
+  try {
+    const proj = await Project.findOne({ pid: req.params.id });
+    if (!proj) {
+      return res.status(404).json({ msg: "Project not found" });
+    }
+    proj.name = req.body.name || proj.name;
+    proj.description = req.body.description || proj.description;
+    proj.updatedAt = Date.now();
+    await proj.save();
+    res.json({ msg: "Project updated", data: proj });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Internal server error" });
+  }
+});
+
+//deleting via body
 router.post("/deleteby", async (req, res) => {
     try {
         const proj = await Project.findOne({ pid: req.body.pid})
@@ -86,10 +103,11 @@ router.post("/deleteby", async (req, res) => {
     }
 });
 
+//deleting via url
 router.delete('/delete/:id', async (req, res) => {
     try {
-      console.log("deleting proj w id" + req.body.pid)
-      const proj = await Project.findByIdAndDelete(req.body.pid);
+      console.log("deleting proj w id" + req.params.pid)
+      const proj = await Project.findByIdAndDelete(req.params.pid);
       if (!proj) {
         return res.status(404).json({ msg: "proj not found" });
       }
