@@ -173,6 +173,34 @@
 				"url": "http://localhost:5600/project/XYZ1"
 			},
 			"response": []
+		},
+		{
+			"name": "UPDATE PROJECT",
+			"id": "31b1ca74-126e-4bab-bbf4-2b0e72fabd85",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDItMjFUMDk6MjQ6NDcuNTc4WiIsImFkbWluIjp0cnVlLCJpYXQiOjE3MDg1MDc0ODcsImV4cCI6MTcwODU5Mzg4N30.VgpnhNyGPOKb7HJaXMhWM7s5i32_dMUNxOxa5sOgWOo"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"update project name for xyz3\",\r\n  \"description\": \"New proj desc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5600/project/XYZ3"
+			},
+			"response": []
 		}
 	]
 }
