@@ -8,7 +8,7 @@ const activityRouter = require("./activity");
 
 router.use("/auth", authRouter);
 
-//put this middleware after logging to apply it to neeche wali routes
+//put this middleware after logging in to apply it to neeche wali routes
 router.use(async (req, res, next) => {
     try {
         const token = req.headers.authorization;
