@@ -201,6 +201,34 @@
 				"url": "http://localhost:5600/project/XYZ3"
 			},
 			"response": []
+		},
+		{
+			"name": "DELETE PROJECT BY",
+			"id": "a7333ab5-20df-4bc2-ab9c-11d2023a84d4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDItMjFUMDk6MjQ6NDcuNTc4WiIsImFkbWluIjp0cnVlLCJpYXQiOjE3MDg1MDc0ODcsImV4cCI6MTcwODU5Mzg4N30.VgpnhNyGPOKb7HJaXMhWM7s5i32_dMUNxOxa5sOgWOo"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pid\": \"XYZ2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5600/project/deleteby"
+			},
+			"response": []
 		}
 	]
 }
